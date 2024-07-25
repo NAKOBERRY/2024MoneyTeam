@@ -26,8 +26,8 @@ public class Timer : MonoBehaviour
     private void Update()
     {
         currTime += Time.deltaTime;
-        second = (int)currTime%60;
-        minute = (int)currTime / 60;
-        text.text = currTime.ToString("f2");
+        second = (int)currTime%10;
+        minute = (int)currTime / 10;
+            text.text = currTime.ToString("f2");
     }
 }
