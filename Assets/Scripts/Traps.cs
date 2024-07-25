@@ -32,7 +32,7 @@ public class Hurdle : MonoBehaviour
             case "Hurdle":
                 KnockBack();
                 break;
-            case "Corn":
+            case "Cone":
                 StartCoroutine(Slow());
                 break;
         }
