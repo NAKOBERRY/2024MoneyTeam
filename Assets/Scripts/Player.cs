@@ -6,12 +6,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rigid;
-    private SpriteRenderer spri;
 
     public float speed = 5f;
     public float jumpPower = 20f;
 
-    [SerializeField] private Vector2 inputVec;
     [SerializeField] public Vector3 bottomOffset;
     [SerializeField] public Vector2 overlabBoxSize;
     [SerializeField] public LayerMask groundLayer;
@@ -26,23 +24,11 @@ public class Player : MonoBehaviour
     }
 
     private void Update()
-    {
-        inputVec.x = Input.GetAxisRaw("Horizontal");
-        inputVec.y = Input.GetAxisRaw("Vertical");
-        FlipSprite();
+    {            
         CheckGrounded();
         Jump();
-        transform.Translate(Vector2.right * inputVec.x * speed * Time.fixedDeltaTime);
-    }
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Obstacle"))
-        {
-            deathPanel.SetActive(true);
-        }
-    }
+        transform.Translate(Vector2.right * speed * Time.fixedDeltaTime);
+    }  
 
     private void OnDrawGizmos()
     {
@@ -60,23 +46,9 @@ public class Player : MonoBehaviour
     }
 
 
-    //¶¥¿¡ ´ê¾Ò´Â°¡ 
+    //¶¥¿¡ ´ê¾Ò´Â°¡  
     public void CheckGrounded()
     {
         isGrounded = Physics2D.OverlapBox(transform.position + bottomOffset, overlabBoxSize, 0, groundLayer);
     }
-
-    //½ºÇÁ¶óÀÌÆ® È¸Àü 
-    public void FlipSprite()
-    {
-        if (inputVec.x < 0)
-        {
-            spri.flipX = true;
-        }
-        else if (inputVec.x > 0)
-        {
-            spri.flipX = false;
-        }
-    }
-
 }
