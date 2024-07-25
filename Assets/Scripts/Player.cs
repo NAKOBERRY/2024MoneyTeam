@@ -6,8 +6,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     Rock rock;
+    Banana banana;
     GameManager gameManager;
-    private Rigidbody2D rigid;
 
     public float speed = 5f;
     public float jumpPower = 20f;
@@ -15,22 +15,15 @@ public class Player : MonoBehaviour
     [SerializeField] public Vector3 bottomOffset;
     [SerializeField] public Vector2 overlabBoxSize;
     [SerializeField] public LayerMask groundLayer;
-    private bool isGrounded;
     public GameObject deathPanel;
     private void Awake()
     {
         rock = FindObjectOfType<Rock>();
         gameManager= FindObjectOfType<GameManager>();
     }
-
-    private void Start()
-    {
-        rigid = GetComponent<Rigidbody2D>();
-    }
-
+ 
     private void Update()
-    {            
-        CheckGrounded();      
+    {                  
         transform.Translate(Vector2.right * speed * Time.deltaTime);
     }  
 
@@ -39,22 +32,7 @@ public class Player : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position + bottomOffset, overlabBoxSize);
     }
-    
-    /*Á¡ÇÁ
-    public void Jump()
-    {
-        if ((Input.GetKeyDown(KeyCode.Space)) && isGrounded)
-        {
-            rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-        }
-    }*/
-
-
-    //¶¥¿¡ ´ê¾Ò´Â°¡  
-    public void CheckGrounded()
-    {
-        isGrounded = Physics2D.OverlapBox(transform.position + bottomOffset, overlabBoxSize, 0, groundLayer);
-    }
+      
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Rock"))
@@ -64,6 +42,7 @@ public class Player : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Banana"))
         {
+            banana.BananaFalse();
             gameManager.isMinigaming = true;
         }
     }
