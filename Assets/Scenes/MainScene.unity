@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 809981189}
   m_Layer: 0
   m_Name: Hurdle
-  m_TagString: Untagged
+  m_TagString: Hurdle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -333,6 +333,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5edf51ce3d73784a8853fb2247fb503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TrapName: 
+  stunTime: 3
 --- !u!1 &966163092
 GameObject:
   m_ObjectHideFlags: 0
