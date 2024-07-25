@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     {
         rock = FindObjectOfType<Rock>();
         gameManager= FindObjectOfType<GameManager>();
+        banana = FindObjectOfType<Banana>();
     }
  
     private void Update()
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour
         {
             banana.isBanana = false;
             gameManager.isMinigaming = true;
+            Debug.Log("¹Ù³ª¤¿¶û Ãæµ¹");
         }
     }
 }
