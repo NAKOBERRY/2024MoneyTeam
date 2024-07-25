@@ -12,6 +12,8 @@ public class Hurdle : MonoBehaviour
     public string TrapName;
     public int xKnockBack;
     public int yKnockBack;
+    public float slowTime;
+    public float slowness;
 
     private void Awake()
     {
@@ -30,12 +32,21 @@ public class Hurdle : MonoBehaviour
             case "Hurdle":
                 KnockBack();
                 break;
+            case "Corn":
+                StartCoroutine(Slow());
+                break;
         }
     }
 
-    public void KnockBack()
+    private void KnockBack()
     {
         rigid.AddForce(new Vector2(-xKnockBack, yKnockBack), ForceMode2D.Impulse);
+    }
+    private IEnumerator Slow()
+    {
+        player.speed /= slowness;
+        yield return new WaitForSeconds(slowTime);
+        player.speed*=slowness;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
