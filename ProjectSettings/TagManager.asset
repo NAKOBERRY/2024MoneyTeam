@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Hurdle
+  - Rock
+  - Cone
+  - Banana
   layers:
   - Default
   - TransparentFX
