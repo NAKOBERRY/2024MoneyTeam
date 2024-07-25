@@ -30,26 +30,7 @@ public class Player : MonoBehaviour
     {
         inputVec.x = Input.GetAxisRaw("Horizontal");
         inputVec.y = Input.GetAxisRaw("Vertical");
-        Jump();
         FlipSprite();
-    }
-
-    private void FixedUpdate()
-    {
-        PlayerMove();
-        CheckGrounded();
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Water"))
-        {           
-            IsSwim();
-        }
-        else if (collision.gameObject.CompareTag("Riding"))
-        {
-            IsRide();
-        }
     }
 
 
@@ -68,13 +49,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    //플레이어 기본 이동
-    public void PlayerMove()
-    {
-        transform.Translate(Vector2.right * inputVec.x * speed * Time.fixedDeltaTime);
-    }
-
-
+    
     //땅에 닿았는가 
     public void CheckGrounded()
     {
@@ -107,9 +82,16 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            transform.Translate(Vector2.right * 1 * speed * Time.fixedDeltaTime);           
+            transform.Translate(Vector2.right * 1 * speed * Time.fixedDeltaTime);
+            Jump();
         }
     }
-    
+
+    //플레이어 기본 이동
+    public void PlayerMove()
+    {
+        transform.Translate(Vector2.right * inputVec.x * speed * Time.fixedDeltaTime);
+        Jump();
+    }
 
 }
