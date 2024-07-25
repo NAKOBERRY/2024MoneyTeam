@@ -6,6 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     Rock rock;
+    GameManager gameManager;
     private Rigidbody2D rigid;
 
     public float speed = 5f;
@@ -16,7 +17,11 @@ public class Player : MonoBehaviour
     [SerializeField] public LayerMask groundLayer;
     private bool isGrounded;
     public GameObject deathPanel;
-
+    private void Awake()
+    {
+        rock = FindObjectOfType<Rock>();
+        gameManager= FindObjectOfType<GameManager>();
+    }
 
     private void Start()
     {
@@ -55,6 +60,11 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Rock"))
         {
             rock.DigRock();
+            gameManager.isMinigaming = true;
+        }
+        if (collision.gameObject.CompareTag("Banana"))
+        {
+
         }
     }
 }
