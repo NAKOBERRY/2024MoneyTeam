@@ -27,70 +27,74 @@ public class Banana : MonoBehaviour
     {
         if (!isBanana)
         {
-            for (int i = 0; i < 4; i++)
+            BananaPat();
+        }     
+    }
+
+    private void BananaPat()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            bananaDir[i] = Random.Range(0, 4);
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            if (bananaDir[i] == 0)
             {
-                bananaDir[i] = Random.Range(0, 4);
+                images[i].sprite = arrowImages[0];
             }
-            for (int i = 0; i < 4; i++)
+            if (bananaDir[i] == 1)
             {
-                if (bananaDir[i] == 0)
-                {
-                    images[i].sprite = arrowImages[0];
-                }
-                if (bananaDir[i] == 1)
-                {
-                    images[i].sprite = arrowImages[1];
-                }
-                if (bananaDir[i] == 2)
-                {
-                    images[i].sprite = arrowImages[2];
-                }
-                if (bananaDir[i] == 3)
-                {
-                    images[i].sprite = arrowImages[3];
-                }
+                images[i].sprite = arrowImages[1];
             }
-            bananaPanel.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (bananaDir[i] == 2)
             {
-                UpdatePlayerDir(0);
-                bananaCount++;
-                Debug.Log("위");
+                images[i].sprite = arrowImages[2];
             }
-            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            if (bananaDir[i] == 3)
             {
-                UpdatePlayerDir(1);
-                bananaCount++;
-                Debug.Log("아래");
+                images[i].sprite = arrowImages[3];
             }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        }
+        bananaPanel.SetActive(true);
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            UpdatePlayerDir(0);
+            bananaCount++;
+            Debug.Log("위");     
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            UpdatePlayerDir(1);
+            bananaCount++;
+            Debug.Log("아래");
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            UpdatePlayerDir(2);
+            bananaCount++;
+            Debug.Log("왼쪽");
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            UpdatePlayerDir(3);
+            bananaCount++;
+            Debug.Log("오른쪽");
+        }
+        if(bananaCount >= 4)
+        {          
+            if (AreArraysEqual(playerDir, bananaDir))
             {
-                UpdatePlayerDir(2);
-                bananaCount++;
-                Debug.Log("왼쪽");
-            }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                UpdatePlayerDir(3);
-                bananaCount++;
-                Debug.Log("오른쪽");
-            }
-            if (bananaCount >= 4)
-            {
-                if (AreArraysEqual(playerDir, bananaDir))
-                {
-                    Debug.Log("일치함");
-                    bananaPanel.SetActive(false);
-                    float x = Random.Range(-20, 21);
-                    float y = Random.Range(5, 10);
-                    rigid.AddForce(new Vector2(x, y), ForceMode2D.Impulse);
-                    boxCollider.isTrigger = true;
-                    isBanana = true;
-                    gameManager.ClearMinigame();
-                }
+                Debug.Log("일치함");
+                bananaPanel.SetActive(false);
+                float x = Random.Range(-20, 21);
+                float y = Random.Range(5, 10);
+                rigid.AddForce(new Vector2(x, y), ForceMode2D.Impulse);
+                boxCollider.isTrigger = true;
+                gameManager.ClearMinigame();
             }
         }     
-    }  
+    }
 
     private void UpdatePlayerDir(int direction)
     {
