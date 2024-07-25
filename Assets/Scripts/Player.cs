@@ -33,27 +33,29 @@ public class Player : MonoBehaviour
         inputVec.y = Input.GetAxisRaw("Vertical");
         FlipSprite();
 
-        PlayerStats(playerStats);    
+        PlayerStats(playerStats);
     }
 
     private void PlayerStats(string playerStats)
     {
-        
-            switch (playerStats)
-            {
-                case "run":
+
+        switch (playerStats)
+        {
+            case "run":
                 PlayerMove();
-                    break;
+                Jump();
+                break;
 
-                case "swim":
+            case "swim":
                 IsSwim();
-                    break;
+                break;
 
-                case "ride":
-                    IsRide();
-                    break;
-            }
-        
+            case "ride":
+                IsRide();
+                Jump();
+                break;
+        }
+
     }
 
 
@@ -66,13 +68,14 @@ public class Player : MonoBehaviour
     //점프
     public void Jump()
     {
-        if ((Input.GetKeyDown(KeyCode.Space)) && isGrounded && !isSwim)
+        CheckGrounded();
+        if ((Input.GetKeyDown(KeyCode.Space)) && isGrounded)
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         }
     }
 
-    
+
     //땅에 닿았는가 
     public void CheckGrounded()
     {
@@ -106,15 +109,13 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             transform.Translate(Vector2.right * 1 * speed * Time.fixedDeltaTime);
-            Jump();
         }
     }
 
     //플레이어 기본 이동
     public void PlayerMove()
     {
-        transform.Translate(Vector2.right * inputVec.x * speed * Time.fixedDeltaTime);
-        Jump();
+        transform.Translate(Vector2.right * inputVec.x * speed * Time.fixedDeltaTime);        
     }
 
 }
