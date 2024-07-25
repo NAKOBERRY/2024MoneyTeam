@@ -64,7 +64,7 @@ public class Player : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Banana"))
         {
-
+            gameManager.isMinigaming = true;
         }
     }
 }

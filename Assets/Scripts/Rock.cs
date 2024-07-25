@@ -6,12 +6,15 @@ public class Rock : MonoBehaviour
 {
     private Rigidbody2D rigid;
     private BoxCollider2D boxCollider;
-    GameManager gameManager;
+    private Animator animator;
+    public GameManager gameManager;
+    
 
     private int digCount=2;
     private bool isDig=false;
     private void Awake()
     {
+        animator= GetComponent<Animator>();
         rigid=GetComponent<Rigidbody2D>();
         boxCollider=GetComponent<BoxCollider2D>();
     }

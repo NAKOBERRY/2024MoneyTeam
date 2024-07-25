@@ -130,6 +130,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4702792499866557900, guid: 753f2ecb052d68f4fb40cd6347b4263f, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 1004512728}
     - target: {fileID: 8306351274927251231, guid: 753f2ecb052d68f4fb40cd6347b4263f, type: 3}
       propertyPath: m_Name
       value: Rock
@@ -1724,7 +1728,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -262976052, guid: c09ec14ce595b7248826cbf77114e2a9, type: 3}
+  m_Sprite: {fileID: -178769989, guid: 819fccd8a5110d6439af9660c23790e1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
