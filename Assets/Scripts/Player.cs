@@ -15,19 +15,17 @@ public class Player : MonoBehaviour
     [SerializeField] public LayerMask groundLayer;
     private bool isGrounded;
     public GameObject deathPanel;
-    
+
 
     private void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
-        spri = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {            
-        CheckGrounded();
-        Jump();
-        transform.Translate(Vector2.right * speed * Time.fixedDeltaTime);
+        CheckGrounded();      
+        transform.Translate(Vector2.right * speed * Time.deltaTime);
     }  
 
     private void OnDrawGizmos()
@@ -36,14 +34,14 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireCube(transform.position + bottomOffset, overlabBoxSize);
     }
     
-    //Á¡ÇÁ
+    /*Á¡ÇÁ
     public void Jump()
     {
         if ((Input.GetKeyDown(KeyCode.Space)) && isGrounded)
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         }
-    }
+    }*/
 
 
     //¶¥¿¡ ´ê¾Ò´Â°¡  
