@@ -6,6 +6,7 @@ public class Rock : MonoBehaviour
 {
     private Rigidbody2D rigid;
     private BoxCollider2D boxCollider;
+    GameManager gameManager;
 
     private int digCount=2;
     private bool isDig=false;
@@ -33,6 +34,7 @@ public class Rock : MonoBehaviour
             float y = Random.Range(5, 10);
             rigid.AddForce(new Vector2(x, y), ForceMode2D.Impulse);
             boxCollider.isTrigger = true;
+            gameManager.ClearMinigame();
             isDig = false;  
         }
     }
