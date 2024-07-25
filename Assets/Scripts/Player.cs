@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         inputVec.x = Input.GetAxisRaw("Horizontal");
+        inputVec.y = Input.GetAxisRaw("Vertical");
         Jump();
         FlipSprite();
     }
@@ -42,14 +43,12 @@ public class Player : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Water"))
-        {
-            isSwim = true;
+        {           
             IsSwim();
         }
         else if (collision.gameObject.CompareTag("Riding"))
         {
-            isRide = true;
-
+            IsRide();
         }
     }
 
@@ -99,9 +98,18 @@ public class Player : MonoBehaviour
     public void IsSwim()
     {
         rigid.gravityScale = 0.3f;
+        transform.Translate(Vector2.right * inputVec.y * speed * Time.fixedDeltaTime);
+        transform.Translate(Vector2.right * inputVec.x * speed * Time.fixedDeltaTime);
     }
 
     //자전거 함수
-
+    public void IsRide()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            transform.Translate(Vector2.right * 1 * speed * Time.fixedDeltaTime);           
+        }
+    }
+    
 
 }
