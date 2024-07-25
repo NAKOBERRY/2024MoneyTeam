@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer spri;
 
     public float speed = 5f;
-    public float jumpPower = 10f;
+    public float jumpPower = 20f;
 
     [SerializeField] private Vector2 inputVec;
     [SerializeField] public Vector3 bottomOffset;
@@ -46,6 +46,29 @@ public class Player : MonoBehaviour
         PlayerStats(playerStats);
     }
 
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Water"))
+        {
+            playerStats = "swim";
+        }
+        else if (collision.gameObject.CompareTag("RIde"))
+        {
+            playerStats = "ride";
+        }
+        else if (collision.gameObject.CompareTag("Run"))
+        {
+            playerStats = "run";
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position + bottomOffset, overlabBoxSize);
+    }
+
     private void PlayerStats(string playerStats)
     {
 
@@ -65,13 +88,6 @@ public class Player : MonoBehaviour
                 Jump();
                 break;
         }
-    }
-
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position + bottomOffset, overlabBoxSize);
     }
 
     //점프
@@ -116,7 +132,7 @@ public class Player : MonoBehaviour
     public void IsRide()
     {
         var rideSpeed = speed + 3f;
-        rigid.gravityScale = 1;
+        rigid.gravityScale = 2;
         if (Input.GetKey(KeyCode.D))
         {
             transform.Translate(Vector2.right * inputVec.x * rideSpeed * Time.fixedDeltaTime);
@@ -126,7 +142,7 @@ public class Player : MonoBehaviour
     //플레이어 기본 이동
     public void PlayerMove()
     {
-        rigid.gravityScale = 1;
+        rigid.gravityScale = 2;
         transform.Translate(Vector2.right * inputVec.x * speed * Time.fixedDeltaTime);
     }
 }
