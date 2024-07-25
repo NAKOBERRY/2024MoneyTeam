@@ -15,10 +15,8 @@ public class Player : MonoBehaviour
     [SerializeField] public Vector3 bottomOffset;
     [SerializeField] public Vector2 overlabBoxSize;
     [SerializeField] public LayerMask groundLayer;
-    private bool isGrounded;
-    private bool isSwim = false;
-    private bool isRide = false;
-    private string playerStats = "run";
+    private bool isGrounded;  
+    private string playerStats = "swim";
 
 
     private void Start()
@@ -32,7 +30,18 @@ public class Player : MonoBehaviour
         inputVec.x = Input.GetAxisRaw("Horizontal");
         inputVec.y = Input.GetAxisRaw("Vertical");
         FlipSprite();
-
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            playerStats = "run";
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            playerStats = "swim";
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            playerStats = "ride";
+        }
         PlayerStats(playerStats);
     }
 
@@ -55,7 +64,6 @@ public class Player : MonoBehaviour
                 Jump();
                 break;
         }
-
     }
 
 
@@ -98,24 +106,26 @@ public class Player : MonoBehaviour
     //수영 함수
     public void IsSwim()
     {
-        rigid.gravityScale = 0.3f;
-        transform.Translate(Vector2.right * inputVec.y * speed * Time.fixedDeltaTime);
+        rigid.gravityScale = 0;
+        transform.Translate(Vector2.up * inputVec.y * speed * Time.fixedDeltaTime);
         transform.Translate(Vector2.right * inputVec.x * speed * Time.fixedDeltaTime);
     }
-
+     
     //자전거 함수
     public void IsRide()
     {
+        var rideSpeed = speed + 3f;
+        rigid.gravityScale = 1;
         if (Input.GetKeyDown(KeyCode.A))
-        {
-            transform.Translate(Vector2.right * 1 * speed * Time.fixedDeltaTime);
+        {          
+            transform.Translate(Vector2.right * 1 * rideSpeed * Time.fixedDeltaTime);
         }
     }
 
     //플레이어 기본 이동
     public void PlayerMove()
     {
+        rigid.gravityScale = 1;
         transform.Translate(Vector2.right * inputVec.x * speed * Time.fixedDeltaTime);        
     }
-
 }
