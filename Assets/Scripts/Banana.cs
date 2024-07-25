@@ -8,7 +8,7 @@ public class Banana : MonoBehaviour
 {
     private int[] bananaDir = new int[4];
     private int[] playerDir = new int[4];
-    private bool isBanana = true;
+    public bool isBanana = true;
     public GameObject bananaPanel;
     private Rigidbody2D rigid;
     private BoxCollider2D boxCollider;
@@ -90,11 +90,7 @@ public class Banana : MonoBehaviour
                 }
             }
         }     
-    }
-    public void BananaFalse()
-    {
-        isBanana = false;
-    }
+    }  
 
     private void UpdatePlayerDir(int direction)
     {

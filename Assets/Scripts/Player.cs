@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Banana"))
         {
-            banana.BananaFalse();
+            banana.isBanana = false;
             gameManager.isMinigaming = true;
         }
     }
