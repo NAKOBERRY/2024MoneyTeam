@@ -10,6 +10,8 @@ public class Hurdle : MonoBehaviour
     public float stunTime; // 스턴 시간이 저장될 변수
     private Coroutine stunCoroutine; // 현재 실행 중인 스턴 코루틴을 참조하기 위한 변수
 
+
+    
     private void Update()
     {
         // 스페이스바가 눌렸을 때 stunTime을 0.1초 줄임

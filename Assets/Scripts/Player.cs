@@ -1,22 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Rigidbody2D rigid;
-    public SpriteRenderer spri;
+    private Rigidbody2D rigid;
+    private SpriteRenderer spri;
 
     [SerializeField] public float speed = 5f;
     [SerializeField] public float jumpPower = 10f;
 
-    [SerializeField] public Vector2 inputVec;
+    [SerializeField] private Vector2 inputVec;
     [SerializeField] public Vector3 bottomOffset;
     [SerializeField] public Vector2 overlabBoxSize;
     [SerializeField] public LayerMask groundLayer;
-    public bool isGrounded;
-    public bool isSwim = false;
-    public bool isRide = false;
+    private bool isGrounded;
+    private bool isSwim = false;
+    private bool isRide = false;
 
 
 
@@ -31,7 +32,12 @@ public class Player : MonoBehaviour
         inputVec.x = Input.GetAxisRaw("Horizontal");
         inputVec.y = Input.GetAxisRaw("Vertical");
         FlipSprite();
+
+        PlayerMove();
+
     }
+
+    
 
 
     private void OnDrawGizmos()
