@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4222599963613793557}
   - component: {fileID: 4738074393442696762}
   m_Layer: 0
-  m_Name: Banana (1)
+  m_Name: Banana
   m_TagString: Banana
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,7 +116,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -184,4 +184,3 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   bananaCount: 0
-  gameManager: {fileID: 0}

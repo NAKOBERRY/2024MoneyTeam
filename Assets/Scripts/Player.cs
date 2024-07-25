@@ -7,36 +7,31 @@ public class Player : MonoBehaviour
 {
     Rock rock;
     Banana banana;
-    GameManager gameManager;
 
     public float speed = 5f;
-   
-
-    
+      
     private void Awake()
     {
-        rock = FindObjectOfType<Rock>();
-        gameManager= FindObjectOfType<GameManager>();
+        rock = FindObjectOfType<Rock>();       
         banana = FindObjectOfType<Banana>();
     }
  
     private void Update()
     {                  
         transform.Translate(Vector2.right * speed * Time.deltaTime);
-    }  
-      
-    private void OnCollisionEnter2D(Collision2D collision)
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Rock"))
         {
-            rock.DigRock();
-            gameManager.isMinigaming = true;
+            rock.isDig = true;
+            GameManager.instance.isMinigaming = true;
         }
         if (collision.gameObject.CompareTag("Banana"))
         {
-            banana.isBanana = false;
-            gameManager.isMinigaming = true;
-            Debug.Log("바나나랑 충돌");
+            banana.isBanana = true;
+            GameManager.instance.isMinigaming = true;
         }
     }
 }
