@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private Rigidbody2D rigid;
-    private SpriteRenderer spri;
+    public Rigidbody2D rigid;
+    public SpriteRenderer spri;
 
-    [SerializeField] private float speed = 5f;
-    [SerializeField] private float jumpPower = 10f;
+    [SerializeField] public float speed = 5f;
+    [SerializeField] public float jumpPower = 10f;
 
-    [SerializeField] private Vector2 inputVec;
-    [SerializeField] private Vector3 bottomOffset;
-    [SerializeField] private Vector2 overlabBoxSize;
-    [SerializeField] private LayerMask groundLayer;
-    private bool isGrounded;
-
+    [SerializeField] public Vector2 inputVec;
+    [SerializeField] public Vector3 bottomOffset;
+    [SerializeField] public Vector2 overlabBoxSize;
+    [SerializeField] public LayerMask groundLayer;
+    public bool isGrounded;
+    public bool isSwim = false;
+    public bool isRide = false;
 
 
 
@@ -38,6 +39,20 @@ public class Player : MonoBehaviour
         CheckGrounded();
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Water"))
+        {
+            isSwim = true;
+            IsSwim();
+        }
+        else if (collision.gameObject.CompareTag("Riding"))
+        {
+            isRide = true;
+
+        }
+    }
+
 
     private void OnDrawGizmos()
     {
@@ -45,26 +60,30 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireCube(transform.position + bottomOffset, overlabBoxSize);
     }
 
-    private void Jump()
+    //점프
+    public void Jump()
     {
-        if ((Input.GetKeyDown(KeyCode.Space)) && isGrounded)
+        if ((Input.GetKeyDown(KeyCode.Space)) && isGrounded && !isSwim)
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         }
     }
 
-    private void PlayerMove()
+    //플레이어 기본 이동
+    public void PlayerMove()
     {
         transform.Translate(Vector2.right * inputVec.x * speed * Time.fixedDeltaTime);
     }
 
-    private void CheckGrounded()
+
+    //땅에 닿았는가 
+    public void CheckGrounded()
     {
         isGrounded = Physics2D.OverlapBox(transform.position + bottomOffset, overlabBoxSize, 0, groundLayer);
     }
 
-
-    private void FlipSprite()
+    //스프라이트 회전 
+    public void FlipSprite()
     {
         if (inputVec.x < 0)
         {
@@ -75,5 +94,14 @@ public class Player : MonoBehaviour
             spri.flipX = false;
         }
     }
+
+    //수영 함수
+    public void IsSwim()
+    {
+        rigid.gravityScale = 0.3f;
+    }
+
+    //자전거 함수
+
 
 }
