@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
 
     Player player;
+    Animator animator;
     //미니게임 클리어 횟수
     public int clearMinigameCount = 0;
     //0번 클리어했을떄의 미니게임 시간
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     public float playerSpeedTemp;
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         player = FindObjectOfType<Player>();
         currMinigameMaxTime = minigameTimeStart;
     }
@@ -54,12 +56,14 @@ public class GameManager : MonoBehaviour
     }
     public void ClearMinigame()
     {
+        //animator.SetBool("isKick", true);
         clearMinigameCount++;
         isMinigaming = false;
         if (currMinigameMaxTime > minigameTimeLimit)
         {
             currMinigameMaxTime -= 0.1f;
         }
+        //animator.SetBool("isKick", false);
     }
     public void GameOver()
     {
