@@ -31,8 +31,11 @@ public class Hurdle : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
-            collision.gameObject.rigid.AddForce(new Vector2(-xKnockBack, yKnockBack), ForceMode2D.Impulse);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            KnockBack();
+
+
 
     }
 }
