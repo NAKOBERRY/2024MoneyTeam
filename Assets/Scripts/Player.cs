@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] public Vector2 overlabBoxSize;
     [SerializeField] public LayerMask groundLayer;
     private bool isGrounded;
+    public GameObject deathPanel;
     
 
     private void Start()
@@ -33,7 +34,15 @@ public class Player : MonoBehaviour
         Jump();
         PlayerMove();
     }
-  
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            deathPanel.SetActive(true);
+        }
+    }
 
     private void OnDrawGizmos()
     {
@@ -77,4 +86,6 @@ public class Player : MonoBehaviour
         rigid.gravityScale = 2;
         transform.Translate(Vector2.right * inputVec.x * speed * Time.fixedDeltaTime);
     }
+
+
 }
