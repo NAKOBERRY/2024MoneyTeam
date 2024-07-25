@@ -8,8 +8,8 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigid;
     private SpriteRenderer spri;
 
-    [SerializeField] public float speed = 5f;
-    [SerializeField] public float jumpPower = 10f;
+    public float speed = 5f;
+    public float jumpPower = 10f;
 
     [SerializeField] private Vector2 inputVec;
     [SerializeField] public Vector3 bottomOffset;
@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     private bool isGrounded;
     private bool isSwim = false;
     private bool isRide = false;
-
+    private string playerStats = "run";
 
 
     private void Start()
@@ -33,11 +33,28 @@ public class Player : MonoBehaviour
         inputVec.y = Input.GetAxisRaw("Vertical");
         FlipSprite();
 
-        PlayerMove();
-
+        PlayerStats(playerStats);    
     }
 
-    
+    private void PlayerStats(string playerStats)
+    {
+        
+            switch (playerStats)
+            {
+                case "run":
+                PlayerMove();
+                    break;
+
+                case "swim":
+                IsSwim();
+                    break;
+
+                case "ride":
+                    IsRide();
+                    break;
+            }
+        
+    }
 
 
     private void OnDrawGizmos()
