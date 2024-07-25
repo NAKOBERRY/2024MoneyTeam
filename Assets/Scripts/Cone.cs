@@ -62,7 +62,10 @@ public class Cone : MonoBehaviour
                 }
             }
         }   
-        else if()
+        else if (true)
+        {
+
+        }
     }
 
     public void ConePat()
