@@ -17,12 +17,7 @@ public class Banana : MonoBehaviour
     public int bananaCount = 0;
 
     private void Start()
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            bananaDir[i] = Random.Range(0, 4); 
-        }
-
+    { 
         rigid = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
     }
@@ -42,6 +37,10 @@ public class Banana : MonoBehaviour
 
     private void BananaPat()
     {
+        for (int i = 0; i < 4; i++)
+        {
+            bananaDir[i] = Random.Range(0, 4);
+        }
         for (int i = 0; i < 4; i++)
         {
             if (bananaDir[i] == 0)
@@ -66,7 +65,7 @@ public class Banana : MonoBehaviour
         {
             UpdatePlayerDir(0);
             bananaCount++;
-            Debug.Log("위");
+            Debug.Log("위");     
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
@@ -87,7 +86,7 @@ public class Banana : MonoBehaviour
             Debug.Log("오른쪽");
         }
         if(bananaCount >= 4)
-        {
+        {          
             if (AreArraysEqual(playerDir, bananaDir))
             {
                 Debug.Log("일치함");
@@ -113,12 +112,12 @@ public class Banana : MonoBehaviour
     private bool AreArraysEqual(int[] array1, int[] array2)
     {
         for (int i = 0; i < array1.Length; i++)
-        {
+        {          
             if (array1[i] != array2[i])
-                Debug.Log("일치하지 않음");
+            {
                 return false;
+            }                                                
         }
-        Debug.Log("일치함");
         return true;
     }
 }
