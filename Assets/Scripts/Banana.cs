@@ -27,12 +27,7 @@ public class Banana : MonoBehaviour
         if (!isBanana)
         {
             BananaPat();
-        }
-        
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            isBanana = false;
-        }
+        }     
     }
 
     private void BananaPat()
