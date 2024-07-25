@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -20,22 +21,34 @@ public class Hurdle : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.V))
-            KnockBack();
-        // 스페이스바가 눌렸을 때 stunTime을 0.1초 줄임
+
+    }
+    public void switchCase()
+    {
+        switch (TrapName)
+        {
+            case "Hurdle":
+                KnockBack();
+                break;
+        }
     }
 
     public void KnockBack()
     {
         rigid.AddForce(new Vector2(-xKnockBack, yKnockBack), ForceMode2D.Impulse);
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
+
             KnockBack();
 
         }
 
+
+        switchCase();
     }
+
 }
+
