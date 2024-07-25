@@ -15,8 +15,8 @@ public class Player : MonoBehaviour
     [SerializeField] public Vector3 bottomOffset;
     [SerializeField] public Vector2 overlabBoxSize;
     [SerializeField] public LayerMask groundLayer;
-    private bool isGrounded;  
-    private string playerStats = "swim";
+    private bool isGrounded;
+    private string playerStats = "run";
 
 
     private void Start()
@@ -30,15 +30,16 @@ public class Player : MonoBehaviour
         inputVec.x = Input.GetAxisRaw("Horizontal");
         inputVec.y = Input.GetAxisRaw("Vertical");
         FlipSprite();
-        if (Input.GetKeyDown(KeyCode.Alpha0))
+        CheckGrounded();
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             playerStats = "run";
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             playerStats = "swim";
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             playerStats = "ride";
         }
@@ -76,7 +77,7 @@ public class Player : MonoBehaviour
     //점프
     public void Jump()
     {
-        CheckGrounded();
+
         if ((Input.GetKeyDown(KeyCode.Space)) && isGrounded)
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
@@ -110,22 +111,22 @@ public class Player : MonoBehaviour
         transform.Translate(Vector2.up * inputVec.y * speed * Time.fixedDeltaTime);
         transform.Translate(Vector2.right * inputVec.x * speed * Time.fixedDeltaTime);
     }
-     
+
     //자전거 함수
     public void IsRide()
     {
         var rideSpeed = speed + 3f;
         rigid.gravityScale = 1;
-        if (Input.GetKeyDown(KeyCode.A))
-        {          
-            transform.Translate(Vector2.right * 1 * rideSpeed * Time.fixedDeltaTime);
-        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.Translate(Vector2.right * inputVec.x * rideSpeed * Time.fixedDeltaTime);
+        }     
     }
 
     //플레이어 기본 이동
     public void PlayerMove()
     {
         rigid.gravityScale = 1;
-        transform.Translate(Vector2.right * inputVec.x * speed * Time.fixedDeltaTime);        
+        transform.Translate(Vector2.right * inputVec.x * speed * Time.fixedDeltaTime);
     }
 }

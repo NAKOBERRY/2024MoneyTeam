@@ -35,7 +35,7 @@ public class Hurdle : MonoBehaviour
         {
             KnockBack();
 
-
+        }
 
     }
 }
