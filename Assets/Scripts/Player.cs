@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    Rock rock;
     private Rigidbody2D rigid;
 
     public float speed = 5f;
@@ -48,5 +49,12 @@ public class Player : MonoBehaviour
     public void CheckGrounded()
     {
         isGrounded = Physics2D.OverlapBox(transform.position + bottomOffset, overlabBoxSize, 0, groundLayer);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Rock"))
+        {
+            rock.DigRock();
+        }
     }
 }
