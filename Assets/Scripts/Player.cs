@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
         FlipSprite();
         CheckGrounded();
         Jump();
-        PlayerMove();
+        transform.Translate(Vector2.right * inputVec.x * speed * Time.fixedDeltaTime);
     }
 
 
@@ -78,14 +78,5 @@ public class Player : MonoBehaviour
             spri.flipX = false;
         }
     }
-
-
-    //플레이어 기본 이동
-    public void PlayerMove()
-    {
-        rigid.gravityScale = 2;
-        transform.Translate(Vector2.right * inputVec.x * speed * Time.fixedDeltaTime);
-    }
-
 
 }
