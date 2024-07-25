@@ -21,6 +21,10 @@ public class Banana : MonoBehaviour
     { 
         rigid = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
+        for (int i = 0; i < 4; i++)
+        {
+            bananaDir[i] = Random.Range(0, 4);
+        }
     }
 
     private void Update()
@@ -30,13 +34,13 @@ public class Banana : MonoBehaviour
             BananaPat();
         }     
     }
+    public void BananaFalse()
+    {
+        isBanana = false;
+    }
 
     private void BananaPat()
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            bananaDir[i] = Random.Range(0, 4);
-        }
+    {       
         for (int i = 0; i < 4; i++)
         {
             if (bananaDir[i] == 0)
@@ -91,6 +95,7 @@ public class Banana : MonoBehaviour
                 float y = Random.Range(5, 10);
                 rigid.AddForce(new Vector2(x, y), ForceMode2D.Impulse);
                 boxCollider.isTrigger = true;
+                Destroy(gameObject);
                 gameManager.ClearMinigame();
             }
         }     

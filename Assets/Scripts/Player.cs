@@ -10,12 +10,9 @@ public class Player : MonoBehaviour
     GameManager gameManager;
 
     public float speed = 5f;
-    public float jumpPower = 20f;
+   
 
-    [SerializeField] public Vector3 bottomOffset;
-    [SerializeField] public Vector2 overlabBoxSize;
-    [SerializeField] public LayerMask groundLayer;
-    public GameObject deathPanel;
+    
     private void Awake()
     {
         rock = FindObjectOfType<Rock>();
@@ -27,12 +24,6 @@ public class Player : MonoBehaviour
     {                  
         transform.Translate(Vector2.right * speed * Time.deltaTime);
     }  
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position + bottomOffset, overlabBoxSize);
-    }
       
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -45,7 +36,7 @@ public class Player : MonoBehaviour
         {
             banana.isBanana = false;
             gameManager.isMinigaming = true;
-            Debug.Log("바나ㅏ랑 충돌");
+            Debug.Log("바나나랑 충돌");
         }
     }
 }

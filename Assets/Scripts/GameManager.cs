@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
+    static GameManager instance; 
+
     Player player;
     Animator animator;
     //미니게임 클리어 횟수
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour
     public float playerSpeedTemp;
     private void Awake()
     {
+        instance = this;
         animator = GetComponent<Animator>();
         player = FindObjectOfType<Player>();
         currMinigameMaxTime = minigameTimeStart;
@@ -56,14 +59,14 @@ public class GameManager : MonoBehaviour
     }
     public void ClearMinigame()
     {
-        //animator.SetBool("isKick", true);
+        
         clearMinigameCount++;
         isMinigaming = false;
         if (currMinigameMaxTime > minigameTimeLimit)
         {
             currMinigameMaxTime -= 0.1f;
         }
-        //animator.SetBool("isKick", false);
+      
     }
     public void GameOver()
     {
