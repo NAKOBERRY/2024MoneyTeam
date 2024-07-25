@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
         {
             playerStats = "swim";
         }
-        else if (collision.gameObject.CompareTag("RIde"))
+        else if (collision.gameObject.CompareTag("Ride"))
         {
             playerStats = "ride";
         }
