@@ -52,7 +52,14 @@ public class Hurdle : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            switchCase();
+
+            KnockBack();
+
         }
+
+
+        switchCase();
     }
+
 }
+
