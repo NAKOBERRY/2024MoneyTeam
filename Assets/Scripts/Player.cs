@@ -20,18 +20,4 @@ public class Player : MonoBehaviour
     {                  
         transform.Translate(Vector2.right * speed * Time.deltaTime);
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Rock"))
-        {
-            rock.isDig = true;
-            GameManager.instance.isMinigaming = true;
-        }
-        if (collision.gameObject.CompareTag("Banana"))
-        {
-            banana.isBanana = true;
-            GameManager.instance.isMinigaming = true;
-        }
-    }
 }

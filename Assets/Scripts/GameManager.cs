@@ -8,15 +8,10 @@ public class GameManager : MonoBehaviour
     public static GameManager instance; 
 
     Player player;    
-    //미니게임 클리어 횟수
     public int clearMinigameCount = 0;
-    //0번 클리어했을떄의 미니게임 시간
     public float minigameTimeStart = 4;
-    //미니게임 시간의 한계치
     public float minigameTimeLimit = 1;
-    //현재 미니게임 시간
     private float currMinigameMaxTime=4;
-    //0.1씩 감소되는 미니게임 실시간 플레이타임
     private float currMinigameTime=4;
 
     public bool isMinigaming = false;

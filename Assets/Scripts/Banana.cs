@@ -13,7 +13,7 @@ public class Banana : MonoBehaviour
     public Image[] images;
     public int bananaCount = 0;
 
-    private void Start()
+    private void OnEnable()
     {
         rigid = GetComponent<Rigidbody2D>();              
         for (int i = 0; i < 4; i++)
